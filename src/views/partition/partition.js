@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const Partition = ({ partition, partitionIndex }) => {
   const [eggsCollected, setEggsCollected] = useState(partition.eggsCollected);
   const [comment, setComment] = useState(partition.comments);

@@ -1,32 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cage from './views/cages/Cage';
-// import './App.module.css';
-// import styles from './App.module.css';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import './index.css';
 
 const App = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [numCages, setNumCages] = useState('');
+  const [error, setError] = useState('');
+  const [isCagesAdded, setIsCagesAdded] = useState(false);
+  const [date, setDate] = useState('');
   const [cages, setCages] = useState([]);
-  const [numCages, setNumCages] = useState(''); // State to store number of cages to add
-  const [error, setError] = useState(''); // State to store error message if invalid input
-  const [isCagesAdded, setIsCagesAdded] = useState(false); // State to track if cages have been added
 
-  // Function to handle number input change
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    setDate(formattedDate);
+  }, []);
+
   const handleNumCagesChange = (e) => {
     setNumCages(e.target.value);
   };
 
-  // Function to add cages based on the input number
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+  };
+
   const addCages = () => {
     const numberOfCages = parseInt(numCages, 10);
 
-    // Validate input (check if it's a valid number and greater than 0)
     if (isNaN(numberOfCages) || numberOfCages <= 0) {
       setError('Please enter a valid number greater than 0');
       return;
     }
 
-    setError(''); // Clear error if the input is valid
-
-    // Create the specified number of cages
+    setError('');
     const newCages = Array.from({ length: numberOfCages }, (_, cageIndex) => ({
       id: cages.length + cageIndex + 1,
       partitions: Array.from({ length: 32 }, () => ({
@@ -40,13 +49,44 @@ const App = () => {
     setIsCagesAdded(true);
   };
 
+  const handleSignIn = () => {
+    setIsSignedIn(true);
+  };
+
+  const handleSignUp = () => {
+    setIsSigningUp(true);
+  };
+
+  const handleSignUpSuccess = () => {
+    setIsSigningUp(false);
+  };
+
+  const viewRecordedData = () => {
+    alert('Viewing recorded data...');
+  };
+
+  if (isSigningUp) {
+    return <SignUp onSignUpSuccess={handleSignUpSuccess} />;
+  }
+
+  if (!isSignedIn) {
+    return <SignIn onSignIn={handleSignIn} onSignUp={handleSignUp} />;
+  }
+
   return (
     <div className="eggventory-app">
       <h1 className="companyname">EggVentory</h1>
-      
-      
-      <div> 
-        {!isCagesAdded && ( // Only show the input and button if cages have not been added
+      <div className="date-section">
+        <label>Date: </label>
+        <input
+          type="date"
+          value={date}
+          onChange={handleDateChange}
+          className="input-date"
+        />
+      </div>
+      <div className="input-section">
+        {!isCagesAdded && (
           <>
             <label>Enter number of cages: </label>
             <input
@@ -60,7 +100,10 @@ const App = () => {
             <button onClick={addCages} className="btn-add-cages">Add Cages</button>
           </>
         )}
-        {error && <p className="error-message">{error}</p>} {/* Display error message if input is invalid */}
+        {error && <p className="error-message">{error}</p>}
+        <div className="view-data-section">
+          <button onClick={viewRecordedData} className="btn-view-data">View Recorded Data</button>
+        </div>
       </div>
       {isCagesAdded && cages.map((cage) => <Cage key={cage.id} cage={cage} />)}
     </div>

@@ -5,7 +5,85 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: none;
+  background-image: url('/public/home-image.jpg');
+  background-attachment: fixed;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  
+  
 }
+.eggventory-app {
+  text-align: center;
+  color: #f8f1f5;
+  font-size: 15px;
+}
+.date-section {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  
+}
+.input-date {
+  font-size: 10px; 
+  padding: 5px;
+  
+}
+.input-cage-number {
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 15px;
+}
+.btn-add-cages {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+ 
+}
+.view-data-section {
+  margin-top: 20px; 
+  
+}
+
+.btn-view-data {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  color: rgb(33, 202, 69);
+  
+}
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 15px;
+  
+}
+.sign-in {
+
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+
+}
+
+.sign-in input {
+  margin: 10px;
+  padding: 5px;
+  font-size: 10px;
+}
+
+.sign-in button {
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor:pointer;
+}
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
