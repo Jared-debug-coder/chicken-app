@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cage from './views/cages/Cage';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from './views/auth/SignIn';
+import SignUp from './views/auth/SignUp';
 import './index.css';
 
 const App = () => {
